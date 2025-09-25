@@ -147,6 +147,11 @@ LLVM_ABI bool extractProfTotalWeight(const Instruction &I,
 LLVM_ABI void setBranchWeights(Instruction &I, ArrayRef<uint32_t> Weights,
                                bool IsExpected);
 
+/// Variant of `setBranchWeights` where the `Weights` will be fit first to
+/// uint32_t by shifting right.
+LLVM_ABI void setFittedBranchWeights(Instruction &I, ArrayRef<uint64_t> Weights,
+                                     bool IsExpected);
+
 /// downscale the given weights preserving the ratio. If the maximum value is
 /// not already known and not provided via \param KnownMaxCount , it will be
 /// obtained from \param Weights.

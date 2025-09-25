@@ -672,7 +672,7 @@ CallBase &llvm::pgo::promoteIndirectCall(CallBase &CB, Function *DirectCallee,
       createBranchWeights(CB.getContext(), Count, TotalCount - Count));
 
   if (AttachProfToDirectCall)
-    setBranchWeights(NewInst, {static_cast<uint32_t>(Count)},
+    setBranchWeights(NewInst, ArrayRef<uint32_t>{static_cast<uint32_t>(Count)},
                      /*IsExpected=*/false);
 
   using namespace ore;

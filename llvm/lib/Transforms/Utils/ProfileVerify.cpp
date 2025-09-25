@@ -103,8 +103,9 @@ bool ProfileInjector::inject() {
     if (AnnotateSelect) {
       for (auto &I : BB) {
         if (isa<SelectInst>(I) && !I.getMetadata(LLVMContext::MD_prof))
-          setBranchWeights(I, {SelectTrueWeight, SelectFalseWeight},
-                           /*IsExpected=*/false);
+          setBranchWeights(
+              I, ArrayRef<uint32_t>{SelectTrueWeight, SelectFalseWeight},
+              /*IsExpected=*/false);
       }
     }
     auto *Term = getTerminatorBenefitingFromMDProf(BB);
